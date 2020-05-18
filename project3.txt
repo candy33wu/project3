@@ -182,7 +182,89 @@ void bType(string input, int pc)
 			bht[current % entry][0] = bht[current % entry][0].substr(1, 2);
 		}
 	}
-
+		
+	else if (str[0] == "blt") {
+		if (reg[rs1] < reg[rs2])
+		{
+			if (bht[current % entry][sta][1] == 'N') {
+				miss[current % entry]++;
+				cout << "N " << "T" << "                misprediction: " << miss[current % entry];
+				if (bht[current % entry][sta] == "SN")
+					bht[current % entry][sta] = "WN";
+				else if (bht[current % entry][sta] == "WN")
+					bht[current % entry][sta] = "WT";
+			}
+			else {
+				if (bht[current % entry][sta] == "WT")
+					bht[current % entry][sta] = "ST";
+				cout << "T " << "T" << "                misprediction: " << miss[current % entry];
+			}
+			bht[current % entry][0] += '1';
+			bht[current % entry][0] = bht[current % entry][0].substr(1, 2);
+			current = findoffset(str[3]);
+			current--;
+		}
+		else {
+			if (bht[current % entry][sta][1] == 'N') {
+				cout << "N " << "N" << "                misprediction: " << miss[current % entry];
+				if (bht[current % entry][sta] == "WN")
+					bht[current % entry][sta] = "SN";
+			}
+			else
+			{			
+				miss[current % entry]++;
+				cout << "T " << "N" << "                misprediction: " << miss[current % entry];
+				if (bht[current % entry][sta] == "ST")
+					bht[current % entry][sta] = "WT";
+				else if (bht[current % entry][sta] == "WT")
+					bht[current % entry][sta] = "WN";
+			}
+			bht[current % entry][0] += '0';
+			bht[current % entry][0] = bht[current % entry][0].substr(1, 2);
+		}
+	}
+	else if (str[0] == "bge") {
+		if (reg[rs1] >= reg[rs2])
+		{
+			if (bht[current % entry][sta][1] == 'N') {
+				miss[current % entry]++;
+				cout << "N " << "T" << "                misprediction: " << miss[current % entry];
+				if (bht[current % entry][sta] == "SN")
+					bht[current % entry][sta] = "WN";
+				else if (bht[current % entry][sta] == "WN")
+					bht[current % entry][sta] = "WT";
+			}
+			else {
+				if (bht[current % entry][sta] == "WT")
+					bht[current % entry][sta] = "ST";
+				cout << "T " << "T" << "                misprediction: " << miss[current % entry];
+			}
+			bht[current % entry][0] += '1';
+			bht[current % entry][0] = bht[current % entry][0].substr(1, 2);
+			current = findoffset(str[3]);
+			current--;
+		}
+		else {
+			if (bht[current % entry][sta][1] == 'N') {
+				cout << "N " << "N" << "                misprediction: " << miss[current % entry];
+				if (bht[current % entry][sta] == "WN")
+					bht[current % entry][sta] = "SN";
+			}
+			else
+			{
+				miss[current % entry]++;
+				cout << "T " << "N" << "                misprediction: " << miss[current % entry];
+				if (bht[current % entry][sta] == "ST")
+					bht[current % entry][sta] = "WT";
+				else if (bht[current % entry][sta] == "WT")
+					bht[current % entry][sta] = "WN";
+			}
+			bht[current % entry][0] += '0';
+			bht[current % entry][0] = bht[current % entry][0].substr(1, 2);
+		}
+	}
+	cout << endl << endl;
+}
 
 int main() {
 	reg[0] = 0;
