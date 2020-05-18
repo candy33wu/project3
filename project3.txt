@@ -12,6 +12,15 @@ int reg[31];
 string** bht;
 int current = 0;//當前pc
 int* miss;
+
+int findoffset(string str) {//找label位置
+	for (int i = 0; i < label.size(); ++i) {
+		if (str == label[i]) {
+			return lbnum[i];
+		}
+	}
+}
+
 int main() {
 	reg[0] = 0;
 	string input, temp;	
