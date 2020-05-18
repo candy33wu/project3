@@ -52,6 +52,36 @@ void rType(string input, int pc)
 		reg[rd] = reg[rs1] + reg[rs2];
 }
 
+void iType(string input, int pc)
+{
+	string fun3, op, str[4];
+	int p, imm, rs1, rd;
+	p = input.find(" ", 0);
+	str[0] = input.substr(0, p);
+	input = input.substr(p + 1, input.length());
+	if (str[0] == "li") {                              //li
+		p = input.find(",", 0);
+		str[1] = input.substr(1, p-1);
+		input = input.substr(p + 1, input.length());
+		str[2] = input.substr(0, input.length());
+		rs1 = atoi(str[2].c_str());
+		rd = atoi(str[1].c_str());
+		reg[rd] = rs1;
+	}
+	else if(str[0] == "addi") {
+		for (int i = 1; i < 3; i++) {
+			p = input.find(",", 0);
+			str[i] = input.substr(1, p);
+			input = input.substr(p + 1, input.length());
+		}
+		str[3] = input.substr(0, input.length());
+		imm = atoi(str[3].c_str());
+		rs1 = atoi(str[2].c_str());
+		rd = atoi(str[1].c_str());
+		reg[rd] = reg[rs1] + imm;
+	}
+}
+
 int main() {
 	reg[0] = 0;
 	string input, temp;	
