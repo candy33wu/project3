@@ -22,12 +22,34 @@ int state(string history) {//對照
 	if (history == "11")
 		return 4;
 }
+
 int findoffset(string str) {//找label位置
 	for (int i = 0; i < label.size(); ++i) {
 		if (str == label[i]) {
 			return lbnum[i];
 		}
 	}
+}
+
+void rType(string input, int pc)
+{
+	string fun7, fun3, op, str[4];
+	int p,rs2,rs1,rd;
+	p = input.find(" ", 0);
+	str[0] = input.substr(0, p);
+	input = input.substr(p + 1, input.length());
+	for (int i = 1; i < 4; i++) {
+		p = input.find(",", 0);
+		str[i] = input.substr(1, p);
+		input = input.substr(p + 1, input.length());
+	}
+	rs2 = atoi(str[3].c_str());
+	rs1 = atoi(str[2].c_str());
+	rd = atoi(str[1].c_str());
+	if (str[0] == "sub")
+		reg[rd]= reg[rs1] - reg[rs2];
+	else if(str[0]=="add")
+		reg[rd] = reg[rs1] + reg[rs2];
 }
 
 int main() {
