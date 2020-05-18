@@ -1,0 +1,14 @@
+#include<iostream>
+#include<string>
+#include<cstring>
+#include<sstream>
+#include<vector>
+#include <cstdlib>
+using namespace std;
+vector<string> inputall, label;
+vector<int>lbnum; 
+int entry = 8;
+int reg[31];
+string** bht;
+int current = 0;//當前pc
+int* miss;
