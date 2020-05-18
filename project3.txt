@@ -12,7 +12,16 @@ int reg[31];
 string** bht;
 int current = 0;//當前pc
 int* miss;
-
+int state(string history) {//對照
+	if (history == "00")
+		return 1;
+	if (history == "01")
+		return 2;
+	if (history == "10")
+		return 3;
+	if (history == "11")
+		return 4;
+}
 int findoffset(string str) {//找label位置
 	for (int i = 0; i < label.size(); ++i) {
 		if (str == label[i]) {
