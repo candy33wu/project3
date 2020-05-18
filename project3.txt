@@ -58,3 +58,25 @@ int main() {
 		getline(cin, input);
 		cou++;
 	}
+	while(current< inputall.size()){//執行
+		if (inputall[current].find("ui", 0) != inputall[current].npos) {
+			continue;
+		}
+		else if (inputall[current][0] == 'l' || inputall[current].find("i", 0) != inputall[current].npos || inputall[current].find("jalr", 0) != inputall[current].npos) {
+			iType(inputall[current], current);
+		}
+		else if (inputall[current][0] == 's' && inputall[current].find(" ", 0) == 2) {
+			continue;
+		}
+		else if (inputall[current][0] == 'b') {
+			bType(inputall[current], current);
+		}
+		else if (inputall[current].find("jal", 0) != inputall[current].npos) {
+			continue;
+		}
+		else {
+			rType(inputall[current], current);
+		}
+		current++;
+	}
+}
