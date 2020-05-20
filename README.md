@@ -8,3 +8,8 @@
 請將程式碼複製至上述軟體中，再編譯執行。  
 
 ## 簡要使用說明:  
+- 如需改變BHT之entry個數，請至程式碼第10行做更改(當前預設為8 entry)。  
+- Input: 使用鍵盤輸入一段組合語言，輸入完畢後請按下2次enter鍵，即可執行；其中，每段指令皆須做換行分隔 (可執行之基本指令包含: add, addi, sub, label, and B-type)   
+> 輸入範例  
+![avatar](https://upload.cc/i1/2020/05/20/PCYsLK.jpg)  
+  
