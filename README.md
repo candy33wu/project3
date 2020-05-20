@@ -37,6 +37,32 @@
 ```cpp  
 #include <cstdlib> //包含atoi函式(string 轉int)  
 ```  
+### Global變數說明:  
+```cpp  
+vector<string> inputall, label;  
+//inputall: 用以存放每行輸入之指令資訊，待後續處理  
+//label: 存放label名稱，以利後續branch發生時尋找目標位置  
+```  
+```cpp  
+vector<int>lbnum; //存各label之下行指令的位置(程式內之行數)  
+```  
+```cpp  
+int entry = 8; // 將entry預設為8   
+```  
+```cpp  
+int reg[31]; //存放registor內的值  
+```  
+```cpp  
+string** bht; //branch history table  
+```  
+```cpp  
+int current = 0;//當前pc  
+```   
+```cpp  
+int* miss; // misprediction次數  
+```  
+
+
 
 
 
