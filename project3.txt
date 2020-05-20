@@ -317,6 +317,9 @@ int main() {
 			continue;
 		}
 		else if (inputall[current][0] == 'l' || inputall[current].find("i", 0) != inputall[current].npos || inputall[current].find("jalr", 0) != inputall[current].npos) {
+			p = inputall[current].find(",", 0);
+   			if (inputall[current][p - 1] == '0' && inputall[current][p - 2] == 'R')
+				continue;
 			iType(inputall[current], current);
 		}
 		else if (inputall[current][0] == 's' && inputall[current].find(" ", 0) == 2) {
