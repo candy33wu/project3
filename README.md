@@ -388,6 +388,9 @@ int findoffset(string str) {//找label位置
 	}
 }
 ```  
-> 尋找 label下一指令位置  
+> 尋找 label下一指令位置 
+##常見問題  
+- 輸入多餘的空格  
+ 
 
   
