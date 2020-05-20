@@ -88,6 +88,41 @@ int main() {
 > cou紀錄當前的讀取行數  
 > bht 各 entry有5格並做初始  
 > miss存各 entry預測累計錯誤次數  
+```cpp  
+	bool push = true;  
+	while (input[0] != cin.eof()) {  
+		push = true;  
+		p = input.find("//", 0); //解決註解  
+		if (p != input.npos) {   
+			input = input.substr(0, p);  
+			if (p == 0) {  
+				cou--;  
+				push = false;  
+			}  
+		}  
+		p = input.find(':', 0); //處理label  
+		if (p != input.npos) {  
+			label.push_back(input.substr(0, p));  
+			lbnum.push_back(cou);  
+			if (p + 1 < input.length()) {//若label與inst未分行  
+				input = input.substr(p + 1, input.length());   
+				if (input[0] == ' ')  
+					input = input.substr(1, input.length());  
+			}  
+			else {  
+				push = false;  
+				cou--;  
+			}  
+		}  
+		if(push)  
+			inputall.push_back(input);  
+		getline(cin, input);  
+		cou++;  
+	}  
+```  
+> 處理每行輸入之字串，首先屏除註解，留下指令。   
+> 尋找 label，處理如 label後續接指令的狀況，並將 label及其下一指令存入陣列中  
+> 如非上述狀況，就將該行指令存入inputall，待後續作處理  
 
 
 
