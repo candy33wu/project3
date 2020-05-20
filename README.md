@@ -124,6 +124,58 @@ int main() {
 > 尋找 label，處理如 label後續接指令的狀況，並將 label及其下一指令存入陣列中  
 > 如非上述狀況，就將該行指令存入inputall，待後續作處理  
 
+```cpp
+void rType(string input, int pc)
+{
+	string fun7, fun3, op, str[4];
+	int p,rs2,rs1,rd;
+	p = input.find(" ", 0);
+	str[0] = input.substr(0, p);
+	input = input.substr(p + 1, input.length());
+	for (int i = 1; i < 4; i++) {
+		p = input.find(",", 0);
+		str[i] = input.substr(1, p);
+		input = input.substr(p + 1, input.length());
+	}
+	rs2 = atoi(str[3].c_str());
+	rs1 = atoi(str[2].c_str());
+	rd = atoi(str[1].c_str());
+	if (str[0] == "sub")
+		reg[rd]= reg[rs1] - reg[rs2];
+	else if(str[0]=="add")
+		reg[rd] = reg[rs1] + reg[rs2];
+}
 
+void iType(string input, int pc)
+{
+	string fun3, op, str[4];
+	int p, imm, rs1, rd;
+	p = input.find(" ", 0);
+	str[0] = input.substr(0, p);
+	input = input.substr(p + 1, input.length());
+	if (str[0] == "li") {                              //li
+		p = input.find(",", 0);
+		str[1] = input.substr(1, p-1);
+		input = input.substr(p + 1, input.length());
+		str[2] = input.substr(0, input.length());
+		rs1 = atoi(str[2].c_str());
+		rd = atoi(str[1].c_str());
+		reg[rd] = rs1;
+	}
+	else if(str[0] == "addi") {
+		for (int i = 1; i < 3; i++) {
+			p = input.find(",", 0);
+			str[i] = input.substr(1, p);
+			input = input.substr(p + 1, input.length());
+		}
+		str[3] = input.substr(0, input.length());
+		imm = atoi(str[3].c_str());
+		rs1 = atoi(str[2].c_str());
+		rd = atoi(str[1].c_str());
+		reg[rd] = reg[rs1] + imm;
+	}
+}
+```
+> 處理字串並且找到對應的 register，做出相應的指令動作  
 
   
