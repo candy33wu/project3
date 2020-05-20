@@ -177,5 +177,194 @@ void iType(string input, int pc)
 }
 ```
 > 處理字串並且找到對應的 register，做出相應的指令動作  
+```cpp
+void bType(string input, int pc)
+{
+	string  fun3, op, str[4], i12, i10, i4, i11;
+	int p,imm, rs2, rs1,sta;
+	p = input.find(" ", 0);
+	str[0] = input.substr(0, p);
+	input = input.substr(p + 1, input.length());
+	for (int i = 1; i < 3; i++) {
+		p = input.find(",", 0);
+		str[i] = input.substr(1, p-1);
+		input = input.substr(p + 1, input.length());
+	}
+	str[3] = input.substr(0, input.length());
+	if (str[3][str[3].length() - 1] == ' ') 
+		str[3] = str[3].substr(0, str[3].length()-1);
+	rs2 = atoi(str[2].c_str());
+	rs1 = atoi(str[1].c_str());
+	sta = state(bht[current % entry][0]);
+	cout << "entry: " << current % entry << "         " << inputall[current] << endl;
+	cout << "(" << bht[current % entry][0] << "," << bht[current % entry][1] << ","
+		<< bht[current % entry][2] << "," << bht[current % entry][3] << "," << bht[current % entry][4] << ") ";
+	if (str[0] == "beq") {
+		if (reg[rs1] == reg[rs2])
+		{
+			if (bht[current % entry][sta][1] == 'N') {
+				miss[current % entry]++;
+				cout << "N "<<"T" << "                misprediction: " << miss[current % entry];			
+				if (bht[current % entry][sta] == "SN") 
+					bht[current % entry][sta] = "WN";
+				else if (bht[current % entry][sta] == "WN") 
+					bht[current % entry][sta] = "WT";			
+			}
+			else {
+				if (bht[current % entry][sta] == "WT")
+					bht[current % entry][sta] = "ST";
+				cout << "T " << "T" << "                misprediction: " << miss[current % entry];
+			}
+			bht[current % entry][0] += '1';
+			bht[current % entry][0] = bht[current % entry][0].substr(1, 2);
+			current = findoffset(str[3]);
+			current--;
+		}
+		else {
+			if (bht[current % entry][sta][1] == 'N') {
+				cout << "N " << "N" << "                misprediction: " << miss[current % entry];
+				if (bht[current % entry][sta] == "WN")
+					bht[current % entry][sta] = "SN";
+			}
+			else
+			{
+				miss[current % entry]++;
+				cout << "T " << "N" << "                misprediction: " << miss[current % entry];			
+				if (bht[current % entry][sta] == "ST")
+					bht[current % entry][sta] = "WT";
+				else if (bht[current % entry][sta] == "WT")
+					bht[current % entry][sta] = "WN";
+			}
+			bht[current % entry][0] += '0';
+			bht[current % entry][0] = bht[current % entry][0].substr(1, 2);
+		}
+	}
+	else if (str[0] == "bne") {
+		if (reg[rs1] != reg[rs2])
+		{
+			if (bht[current % entry][sta][1] == 'N') {
+				miss[current % entry]++;
+				cout << "N " << "T" << "                misprediction: " << miss[current % entry];				
+				if (bht[current % entry][sta] == "SN")
+					bht[current % entry][sta] = "WN";
+				else if (bht[current % entry][sta] == "WN")
+					bht[current % entry][sta] = "WT";
+			}
+			else {
+				if (bht[current % entry][sta] == "WT")
+					bht[current % entry][sta] = "ST";
+				cout << "T " << "T" << "                misprediction: " << miss[current % entry];
+			}
+			bht[current % entry][0] += '1';
+			bht[current % entry][0] = bht[current % entry][0].substr(1, 2);
+			current = findoffset(str[3]);
+			current--;
+		}
+		else {
+			if (bht[current % entry][sta][1] == 'N') {
+				cout << "N " << "N" << "                misprediction: " << miss[current % entry];
+				if (bht[current % entry][sta] == "WN")
+					bht[current % entry][sta] = "SN";
+			}
+			else
+			{		
+				miss[current % entry]++;
+				cout << "T " << "N" << "                misprediction: " << miss[current % entry];
+				if (bht[current % entry][sta] == "ST")
+					bht[current % entry][sta] = "WT";
+				else if (bht[current % entry][sta] == "WT")
+					bht[current % entry][sta] = "WN";
+			}
+			bht[current % entry][0] += '0';
+			bht[current % entry][0] = bht[current % entry][0].substr(1, 2);
+		}
+	}
+		
+	else if (str[0] == "blt") {
+		if (reg[rs1] < reg[rs2])
+		{
+			if (bht[current % entry][sta][1] == 'N') {
+				miss[current % entry]++;
+				cout << "N " << "T" << "                misprediction: " << miss[current % entry];
+				if (bht[current % entry][sta] == "SN")
+					bht[current % entry][sta] = "WN";
+				else if (bht[current % entry][sta] == "WN")
+					bht[current % entry][sta] = "WT";
+			}
+			else {
+				if (bht[current % entry][sta] == "WT")
+					bht[current % entry][sta] = "ST";
+				cout << "T " << "T" << "                misprediction: " << miss[current % entry];
+			}
+			bht[current % entry][0] += '1';
+			bht[current % entry][0] = bht[current % entry][0].substr(1, 2);
+			current = findoffset(str[3]);
+			current--;
+		}
+		else {
+			if (bht[current % entry][sta][1] == 'N') {
+				cout << "N " << "N" << "                misprediction: " << miss[current % entry];
+				if (bht[current % entry][sta] == "WN")
+					bht[current % entry][sta] = "SN";
+			}
+			else
+			{			
+				miss[current % entry]++;
+				cout << "T " << "N" << "                misprediction: " << miss[current % entry];
+				if (bht[current % entry][sta] == "ST")
+					bht[current % entry][sta] = "WT";
+				else if (bht[current % entry][sta] == "WT")
+					bht[current % entry][sta] = "WN";
+			}
+			bht[current % entry][0] += '0';
+			bht[current % entry][0] = bht[current % entry][0].substr(1, 2);
+		}
+	}
+	else if (str[0] == "bge") {
+		if (reg[rs1] >= reg[rs2])
+		{
+			if (bht[current % entry][sta][1] == 'N') {
+				miss[current % entry]++;
+				cout << "N " << "T" << "                misprediction: " << miss[current % entry];
+				if (bht[current % entry][sta] == "SN")
+					bht[current % entry][sta] = "WN";
+				else if (bht[current % entry][sta] == "WN")
+					bht[current % entry][sta] = "WT";
+			}
+			else {
+				if (bht[current % entry][sta] == "WT")
+					bht[current % entry][sta] = "ST";
+				cout << "T " << "T" << "                misprediction: " << miss[current % entry];
+			}
+			bht[current % entry][0] += '1';
+			bht[current % entry][0] = bht[current % entry][0].substr(1, 2);
+			current = findoffset(str[3]);
+			current--;
+		}
+		else {
+			if (bht[current % entry][sta][1] == 'N') {
+				cout << "N " << "N" << "                misprediction: " << miss[current % entry];
+				if (bht[current % entry][sta] == "WN")
+					bht[current % entry][sta] = "SN";
+			}
+			else
+			{
+				miss[current % entry]++;
+				cout << "T " << "N" << "                misprediction: " << miss[current % entry];
+				if (bht[current % entry][sta] == "ST")
+					bht[current % entry][sta] = "WT";
+				else if (bht[current % entry][sta] == "WT")
+					bht[current % entry][sta] = "WN";
+			}
+			bht[current % entry][0] += '0';
+			bht[current % entry][0] = bht[current % entry][0].substr(1, 2);
+		}
+	}
+	cout << endl << endl;
+}
+```  
+> 處理字串，並找到對應的 register，做出相對的指令動作  
+> 其中2-bit prediction依照前面所述之原理實作出其程式碼  
+
 
   
