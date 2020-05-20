@@ -365,6 +365,18 @@ void bType(string input, int pc)
 ```  
 > 處理字串，並找到對應的 register，做出相對的指令動作  
 > 其中2-bit prediction依照前面所述之原理實作出其程式碼  
-
+```cpp
+int state(string history) {//對照
+ if (history == "00")
+  return 1;
+ if (history == "01")
+  return 2;
+ if (history == "10")
+  return 3;
+ if (history == "11")
+  return 4;
+}
+```  
+> 將 history對應bht中之陣列位置  
 
   
