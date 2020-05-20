@@ -12,4 +12,10 @@
 - Input: 使用鍵盤輸入一段組合語言，輸入完畢後請按下2次enter鍵，即可執行；其中，每段指令皆須做換行分隔 (可執行之基本指令包含: add, addi, sub, label, and B-type)   
 > 輸入範例  
 ![avatar](https://upload.cc/i1/2020/05/20/PCYsLK.jpg)  
+
+- Output: 螢幕顯示該段組合語言運行時，各branch當下之prediction及實際發生狀況和該branch詳細之資訊(屬於何entry、misprediction次數、當前branch之指令)  
+> 輸出範例  
+![avatar](https://upload.cc/i1/2020/05/20/T9D8NQ.jpg)  
+
+
   
