@@ -379,4 +379,15 @@ int state(string history) {//對照
 ```  
 > 將 history對應bht中之陣列位置  
 
+```cpp
+int findoffset(string str) {//找label位置
+	for (int i = 0; i < label.size(); ++i) {
+		if (str == label[i]) {
+			return lbnum[i];
+		}
+	}
+}
+```  
+> 尋找 label下一指令位置  
+
   
