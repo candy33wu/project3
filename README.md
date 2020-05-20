@@ -17,5 +17,27 @@
 > 輸出範例  
 ![avatar](https://upload.cc/i1/2020/05/20/T9D8NQ.jpg)  
 
+## 程式結構說明:  
+
+### 基本原理:  
+2-bit prediction是每當遇到branch時就去尋找該對應的entry的BHT，  
+其中hisory是由前2次該entry實作branch的結果來決定的(T為1，NT為0)，藉由history去尋找對應的prediction。  
+
+![avatar](https://upload.cc/i1/2020/05/20/TMurV3.gif)  
+### 引用函式庫說明:  
+```cpp  
+#include<iostream> //負責輸出/輸入  
+```  
+```cpp  
+#include<string>  //負責字串處理  
+```  
+```cpp  
+#include<vector> //container  
+```  
+```cpp  
+#include <cstdlib> //包含atoi函式(string 轉int)  
+```  
+
+
 
   
