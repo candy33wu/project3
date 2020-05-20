@@ -62,7 +62,32 @@ int current = 0;//當前pc
 int* miss; // misprediction次數  
 ```  
 
+### 詳細程式碼說明 
 
+```cpp  
+int main() {  
+	reg[0] = 0;  
+	string input; 	 
+	int p, pc;  
+	getline(cin, input);  
+	int cou = 0;  
+	bht = new string*[entry];  
+		for (int i = 0; i < entry; ++i)   
+		bht[i] = new string[5];  
+	for (int i = 0; i < entry; ++i){//初始  
+		bht[i][0] ="00";   
+		for (int j = 1; j < 5; ++j)  
+			bht[i][j] = "SN";  
+	}  
+	miss = new int[entry]();  
+```  
+> reg[0]為R0不可更改  
+> input取各行 cin的指令  
+> p為一暫存值，為找尋 string中某字元的位置  
+> pc紀錄當前的執行位置  
+> cou紀錄當前的讀取行數  
+> bht 各 entry有5格並做初始  
+> miss存各 entry預測累計錯誤次數  
 
 
 
