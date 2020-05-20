@@ -332,6 +332,9 @@ int main() {
 			continue;
 		}
 		else {
+			p = inputall[current].find(",", 0);
+   			if (inputall[current][p - 1] == '0' && inputall[current][p - 2] == 'R')
+    				continue;
 			rType(inputall[current], current);
 		}
 		current++;
