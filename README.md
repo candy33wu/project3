@@ -81,7 +81,7 @@ int main() {
 	}  
 	miss = new int[entry]();  
 ```  
-> reg[0]為R0不可更改  
+> reg[0]為R0不可更改    
 > input取各行 cin的指令  
 > p為一暫存值，為找尋 string中某字元的位置  
 > pc紀錄當前的執行位置  
@@ -121,8 +121,8 @@ int main() {
 	}  
 ```  
 > 處理每行輸入之字串，首先偋除註解，留下指令。   
-> 尋找 label，處理如 label後續接指令的狀況，並將 label及其下一指令存入陣列中  
-> 如非上述狀況，即將該行指令存入inputall，待後續作處理   
+> 尋找 label，處理如 label後續接指令的狀況，並將 label及其下一指令存入陣列中。     
+> 如非上述狀況，就將該行指令存入inputall，待後續作處理。      
 ```cpp  
 while(current< inputall.size()){//執行
 		if (inputall[current].find("ui", 0) != inputall[current].npos) {
@@ -147,8 +147,8 @@ while(current< inputall.size()){//執行
 	}
 }
 ```    
-> 依照各指令字元出現之規律，找到其對應 type    
-> 呼叫相對之 function做處理    
+> 依照各指令字元出現之規律，找到其對應 type。      
+> 呼叫相對之 function做處理。      
 ```cpp  
 void rType(string input, int pc)
 {
@@ -201,9 +201,9 @@ void iType(string input, int pc)
 	}
 }
 ```
-> 處理字串並且找到對應的 register，做出相應的指令動作   
-> 其中 I-type function 含 addi 及 li    
-> R-type 含 add 及 sub 指令   
+> 處理字串並且找到對應的 register，做出相應的指令動作。     
+> 其中 I-type function 含 addi 及 li。       
+> 而 R-type 含 add 及 sub 指令。     
 
 ```cpp
 void bType(string input, int pc)
@@ -391,9 +391,9 @@ void bType(string input, int pc)
 	cout << endl << endl;
 }
 ```  
-> 處理字串，並找到對應的 register，做出相對的指令動作   
-> 實作判斷該 branch 是否需taken跳至指定位置續接執行      
-> 其中2-bit prediction依照前面所述之原理實作出其程式碼  
+> 處理字串，並找到對應的 register，做出相對的指令動作。    
+> 實作判斷該 branch 是否需taken跳至指定位置續接執行。        
+> 其中2-bit prediction依照前面所述之原理實作出其程式碼。    
 ```cpp
 int state(string history) {//對照
  if (history == "00")
