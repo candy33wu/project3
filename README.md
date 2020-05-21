@@ -176,7 +176,33 @@ void iType(string input, int pc)
 	}
 }
 ```
-> 處理字串並且找到對應的 register，做出相應的指令動作  
+> 處理字串並且找到對應的 register，做出相應的指令動作   
+```cpp  
+while(current< inputall.size()){//執行
+		if (inputall[current].find("ui", 0) != inputall[current].npos) {
+			continue;
+		}
+		else if (inputall[current][0] == 'l' || inputall[current].find("i", 0) != inputall[current].npos || inputall[current].find("jalr", 0) != inputall[current].npos) {
+			iType(inputall[current], current);
+		}
+		else if (inputall[current][0] == 's' && inputall[current].find(" ", 0) == 2) {
+			continue;
+		}
+		else if (inputall[current][0] == 'b') {
+			bType(inputall[current], current);
+		}
+		else if (inputall[current].find("jal", 0) != inputall[current].npos) {
+			continue;
+		}
+		else {
+			rType(inputall[current], current);
+		}
+		current++;
+	}
+}
+```  
+> 依照各指令字元出現之規律，找到其對應 type   
+> 去呼叫相對之 function做處理   
 ```cpp
 void bType(string input, int pc)
 {
