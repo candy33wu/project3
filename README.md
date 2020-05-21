@@ -120,11 +120,36 @@ int main() {
 		cou++;  
 	}  
 ```  
-> 處理每行輸入之字串，首先屏除註解，留下指令。   
+> 處理每行輸入之字串，首先偋除註解，留下指令。   
 > 尋找 label，處理如 label後續接指令的狀況，並將 label及其下一指令存入陣列中  
-> 如非上述狀況，就將該行指令存入inputall，待後續作處理  
-
-```cpp
+> 如非上述狀況，就將該行指令存入inputall，待後續作處理   
+```cpp  
+while(current< inputall.size()){//執行
+		if (inputall[current].find("ui", 0) != inputall[current].npos) {
+			continue;
+		}
+		else if (inputall[current][0] == 'l' || inputall[current].find("i", 0) != inputall[current].npos || inputall[current].find("jalr", 0) != inputall[current].npos) {
+			iType(inputall[current], current);
+		}
+		else if (inputall[current][0] == 's' && inputall[current].find(" ", 0) == 2) {
+			continue;
+		}
+		else if (inputall[current][0] == 'b') {
+			bType(inputall[current], current);
+		}
+		else if (inputall[current].find("jal", 0) != inputall[current].npos) {
+			continue;
+		}
+		else {
+			rType(inputall[current], current);
+		}
+		current++;
+	}
+}
+```    
+> 依照各指令字元出現之規律，找到其對應 type    
+> 呼叫相對之 function做處理    
+```cpp  
 void rType(string input, int pc)
 {
 	string fun7, fun3, op, str[4];
@@ -177,32 +202,9 @@ void iType(string input, int pc)
 }
 ```
 > 處理字串並且找到對應的 register，做出相應的指令動作   
-```cpp  
-while(current< inputall.size()){//執行
-		if (inputall[current].find("ui", 0) != inputall[current].npos) {
-			continue;
-		}
-		else if (inputall[current][0] == 'l' || inputall[current].find("i", 0) != inputall[current].npos || inputall[current].find("jalr", 0) != inputall[current].npos) {
-			iType(inputall[current], current);
-		}
-		else if (inputall[current][0] == 's' && inputall[current].find(" ", 0) == 2) {
-			continue;
-		}
-		else if (inputall[current][0] == 'b') {
-			bType(inputall[current], current);
-		}
-		else if (inputall[current].find("jal", 0) != inputall[current].npos) {
-			continue;
-		}
-		else {
-			rType(inputall[current], current);
-		}
-		current++;
-	}
-}
-```  
-> 依照各指令字元出現之規律，找到其對應 type   
-> 去呼叫相對之 function做處理   
+> 其中 I-type function 含 addi 及 li    
+> R-type 含 add 及 sub 指令   
+
 ```cpp
 void bType(string input, int pc)
 {
@@ -389,7 +391,8 @@ void bType(string input, int pc)
 	cout << endl << endl;
 }
 ```  
-> 處理字串，並找到對應的 register，做出相對的指令動作  
+> 處理字串，並找到對應的 register，做出相對的指令動作 
+> 實作判斷該 branch 是否需taken跳至指定位置續接執行      
 > 其中2-bit prediction依照前面所述之原理實作出其程式碼  
 ```cpp
 int state(string history) {//對照
@@ -403,7 +406,7 @@ int state(string history) {//對照
   return 4;
 }
 ```  
-> 將 history對應bht中之陣列位置  
+> 將 history對應至 bht中之陣列位置  
 
 ```cpp
 int findoffset(string str) {//找label位置
@@ -419,6 +422,7 @@ int findoffset(string str) {//找label位置
 ## 常見問題  
 - 輸入多餘的空格  
 - register必須由"R"+ 數字 構成  
+- label 後若不直接續接程式碼，須採換行分割，不可有多餘之空白  
  
 
   
