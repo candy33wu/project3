@@ -9,7 +9,7 @@
 
 ## 簡要使用說明:  
 - 如需改變BHT之entry個數，請至程式碼第10行做更改(當前預設為8 entry)。  
-- Input: 使用鍵盤輸入一段組合語言，輸入完畢後請按下2次enter鍵，即可執行；其中，每段指令皆須做換行分隔 (可執行之基本指令包含: add, addi, sub, label, and B-type)   
+- Input: 使用鍵盤輸入一段組合語言，輸入完畢後請按下2次enter鍵，即可執行；其中，每段指令皆須做換行分隔 (可執行之基本指令包含: add, addi, sub, label, li, and B-type)   
 > 輸入範例  
 ![avatar](https://upload.cc/i1/2020/05/20/PCYsLK.jpg)  
 
@@ -122,7 +122,7 @@ int main() {
 ```  
 > 處理每行輸入之字串，首先偋除註解，留下指令。   
 > 尋找 label，處理如 label後續接指令的狀況，並將 label及其下一指令存入陣列中  
-> 如非上述狀況，就將該行指令存入inputall，待後續作處理   
+> 如非上述狀況，即將該行指令存入inputall，待後續作處理   
 ```cpp  
 while(current< inputall.size()){//執行
 		if (inputall[current].find("ui", 0) != inputall[current].npos) {
@@ -391,7 +391,7 @@ void bType(string input, int pc)
 	cout << endl << endl;
 }
 ```  
-> 處理字串，並找到對應的 register，做出相對的指令動作 
+> 處理字串，並找到對應的 register，做出相對的指令動作   
 > 實作判斷該 branch 是否需taken跳至指定位置續接執行      
 > 其中2-bit prediction依照前面所述之原理實作出其程式碼  
 ```cpp
